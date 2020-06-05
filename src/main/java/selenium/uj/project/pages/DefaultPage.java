@@ -3,6 +3,7 @@ package selenium.uj.project.pages;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import selenium.uj.project.utils.CustomTestLog;
 
@@ -33,6 +34,13 @@ public abstract class DefaultPage {
         logger.info(CustomTestLog.getElementMessage(element, CustomTestLog.CLICK_ACTION));
         element.click();
     }
+    protected void dbClickElement(WebElement element) {
+        // OPCJONALNIE - dodać oczekiwanie na element
+        logger.info(CustomTestLog.getElementMessage(element, CustomTestLog.CLICK_ACTION));
+        Actions action = new Actions(driver);
+        action.doubleClick(element).perform();
+
+    }
 
     protected void selectCheckbox(WebElement element, boolean checked) {
         // OPCJONALNIE - dodać oczekiwanie na element
@@ -47,11 +55,6 @@ public abstract class DefaultPage {
                 element.click();
             }
         }
-    }
-
-    protected  void smallDelay() {
-
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     protected boolean isElementDisplayed(WebElement element) {
