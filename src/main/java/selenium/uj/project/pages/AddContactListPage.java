@@ -13,6 +13,9 @@ public class AddContactListPage extends DefaultPage {
     @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/form/button")
     private WebElement createButton;
 
+    @FindBy (xpath = "//*[@id=\"root\"]/div/div[2]/div[2]/div[1]/div[2]/button[2]")
+    private WebElement removeButton;
+
     public AddContactListPage(WebDriver driver, Logger logger) {
         super(driver, logger);
     }
@@ -24,6 +27,8 @@ public class AddContactListPage extends DefaultPage {
 
     public ContactListPage submitAddContactListForm() {
         clickElement(createButton);
+        clickElement(removeButton);
+        driver.switchTo().alert().accept();
         return new ContactListPage(driver,logger);
     }
 }
